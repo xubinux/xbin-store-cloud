@@ -1,0 +1,20 @@
+server:
+    port: 8506
+
+turbine:
+  aggregator:
+    clusterConfig: default   # 指定聚合哪些集群，多个使用","分割，默认为default。可使用http://.../turbine.stream?cluster={clusterConfig之一}访问
+  appConfig: xbin-store-cloud-service-admin,xbin-store-cloud-web-admin,xbin-store-cloud-service-search,xbin-store-cloud-web-search,xbin-store-cloud-service-portal,xbin-store-cloud-web-portal,xbin-store-cloud-service-item,xbin-store-cloud-web-item,xbin-store-cloud-service-cart,xbin-store-cloud-web-cart,xbin-store-cloud-service-notify,xbin-store-cloud-web-notify,xbin-store-cloud-service-sso,xbin-store-cloud-web-order,xbin-store-cloud-service-order,xbin-store-cloud-web-cart  # 配置Eureka中的serviceId列表，表明监控哪些服务
+  clusterNameExpression: new String("default")
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8501/eureka/,http://localhost:8601/eureka/,http://localhost:8701/eureka/
+
+spring:
+  rabbitmq:
+    host: 219.230.50.73
+    port: 5672
+    username: guest
+    password: guest

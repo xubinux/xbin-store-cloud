@@ -1,0 +1,20 @@
+server:
+  port: ${port:8503}
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${eureka.serviceUrl:http://127.0.0.1:8503/eureka/}
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      label: master
+      server:
+        git:
+          uri: 'http://admin@localhost:8078/r/config-server.git'
+          username: admin
+          password: admin
+          search-paths: '*'

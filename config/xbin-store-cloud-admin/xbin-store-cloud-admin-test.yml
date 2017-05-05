@@ -1,0 +1,74 @@
+# web配置------------------------------------------------------------------------------------------------------------------------------------------------
+web:
+  server:
+    port: 8100
+
+# service配置------------------------------------------------------------------------------------------------------------------------------------------------
+service:
+  server:
+    port: 8510
+
+druid:
+    url: jdbc:mysql://219.230.50.73:3306/xbin_store?characterEncoding=utf-8
+    driver-class: com.mysql.jdbc.Driver
+    username: root
+    password: OZo+t9QET+ctzd5Esn9q0GJP5hXtWWIKEsX8c4/w6z4C4AnxrwpvySNgBS89XdazOavjXXZp0oeZtQ3P9lLGEA==
+    initial-size: 1
+    min-idle: 1
+    max-active: 20
+    test-on-borrow: true
+    max-wait: 60000
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
+    validation-query: SELECT 1 FROM DUAL
+    test-While-Idle: true
+    test-on-return: false
+    pool-prepared-statements: false
+    max-pool-prepared-statement-per-connection-size: 20
+    filters: stat,wall,log4j,config
+    connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000;config.decrypt=true
+    monitor:
+          enabled: false
+          druid-stat-view: /druid/*
+          druid-web-stat-filter: /*
+          allow: 219.230.50.107,127.0.0.1
+          deny: 192.168.1.73
+          login-username: admin
+          login-password: 123456
+          exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+          reset-enable: false
+mybatis:
+    type-aliases-package: cn.binux.pojo
+    mapper-locations: classpath:mapper/*.xml
+
+# Redis
+redisKey:
+    # 缓存时间 默认半小时
+  expire_time: 1800
+  prefix:
+    # 首页广告
+    index_ad: 'INDEX_AD'
+
+# 公用配置------------------------------------------------------------------------------------------------------------------------------------------------
+spring:
+  zipkin:
+    base-url: http://127.0.0.1:8504
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8501/eureka/,http://localhost:8601/eureka/,http://localhost:8701/eureka/
+
+
+fastdfs:
+  tracker:
+    server: 192.168.125.129:22122
+  base:
+    url: http://192.168.125.132/
+
+# ------------------------------------------------------------------------------------------------------------------------------------------------

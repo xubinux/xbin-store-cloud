@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: xbin-store-cloud-service-sso
+  cloud:
+    config:
+      label: master
+      profile: dev
+      discovery:
+        enabled: true
+        service-id: config-server
+      name: xbin-store-cloud-sso
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+security.basic.enabled: false
+
+server:
+  port: ${service.server.port:8515}
+
+management:
+  security:
+    enabled: false
+
+eureka:
+  instance:
+    status-page-url: http://localhost:${server.port}/swagger-ui.html # ${server.port}为该服务的端口号
+  client:
+    serviceUrl:
+      defaultZone: ${eureka.serviceUrl:http://127.0.0.1:8503/eureka/}
+
+# REDIS (RedisProperties)
+redis:
+  cluster: false
+  single-host: 219.230.50.94
+  single-port: 6379
+  password:

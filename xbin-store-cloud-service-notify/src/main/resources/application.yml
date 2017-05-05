@@ -1,0 +1,19 @@
+# swagger2
+swagger2.package: cn.binux.notify.service
+
+# Redis
+redisKey:
+  # 缓存时间 默认半小时
+  expire_time: 3600
+  prefix:
+    # 号码登录次数前缀
+    mobile_login_time:
+      key: 'MOBILE_LOGIN_TIME:'
+      expire_time: 3600
+    # 号码code前缀
+    mobile_login_code:
+      key: 'MOBILE_LOGIN_CODE:'
+      expire_time: 120
+
+# Redis 一段时间允许发送几条短信
+mobile_number_ceiling: 3

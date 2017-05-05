@@ -1,0 +1,14 @@
+#配置模板想到classpath路径，后面须加上"/"
+beetl:
+  templates-path: templates/
+  config:
+      html-tag-flag: true
+#配置模板的后缀，自动读取spring.mvc.view.suffix
+spring:
+  mvc:
+    view:
+      suffix: .html
+
+# swagger2
+swagger2.package: cn.binux.item.controller
+

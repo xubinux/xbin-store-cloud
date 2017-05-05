@@ -1,0 +1,49 @@
+#DUBBO
+dubbox:
+  application:
+    name: xbin-store-web-sso
+    organization: dubbox
+    owner: binux
+  registry:
+    protocol: zookeeper
+    address: 192.168.125.128:2181
+  annotation:
+    package: cn.binux.sso.controller
+  monitor:
+    enabled: false
+    address: 192.168.125.1:6060
+    username: admin
+    password: admin
+
+#配置模板想到classpath路径，后面须加上"/"
+beetl:
+  templates-path: templates/
+  config:
+      html-tag-flag: true
+#配置模板的后缀，自动读取spring.mvc.view.suffix
+spring:
+  mvc:
+    view:
+      suffix: .html
+
+server:
+  port: 8104
+
+
+# swagger2
+swagger2.package: cn.binux.sso.controller
+
+# Redis
+redisKey:
+  # 缓存时间
+  expire_time: 120
+  prefix:
+    # 验证码Redis前缀
+    verifycode: 'VERIFYCODE:'
+
+# 密码错误
+password_error: '({"pwd":"\u8d26\u6237\u540d\u4e0e\u5bc6\u7801\u4e0d\u5339\u914d\uff0c\u8bf7\u91cd\u65b0\u8f93\u5165\","_t":"_ntInoTX"})'
+# 用户名不存在
+user_not_exist: '({"pwd":"\u8d26\u6237\u540d\u4e0e\u5bc6\u7801\u4e0d\u5339\u914d\uff0c\u8bf7\u91cd\u65b0\u8f93\u5165<br/>\u5982\u9700\u6d77\u5916\u624b\u673a\u767b\u5f55\u8bf7\u6dfb\u52a0 <a href=\\"javascript:void(0);" id="country_code_selector" class="flk13" style="color:blue;">\u56fd\u5bb6\u533a\u53f7</a>","_t":"_ntqtNMt","countryTips":true})'
+# 成功响应首页
+portal_path: '({"success":"http://localhost:8101/"})'
