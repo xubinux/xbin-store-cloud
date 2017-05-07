@@ -1,19 +1,5 @@
-#DUBBO
-dubbox:
-  application:
-    name: xbin-store-web-sso
-    organization: dubbox
-    owner: binux
-  registry:
-    protocol: zookeeper
-    address: 192.168.125.128:2181
-  annotation:
-    package: cn.binux.sso.controller
-  monitor:
-    enabled: false
-    address: 192.168.125.1:6060
-    username: admin
-    password: admin
+# swagger2
+swagger2.package: cn.binux.sso.controller
 
 #配置模板想到classpath路径，后面须加上"/"
 beetl:
@@ -25,13 +11,6 @@ spring:
   mvc:
     view:
       suffix: .html
-
-server:
-  port: 8104
-
-
-# swagger2
-swagger2.package: cn.binux.sso.controller
 
 # Redis
 redisKey:

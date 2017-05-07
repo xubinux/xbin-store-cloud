@@ -1,5 +1,5 @@
 server:
-  port: ${port:8503}
+  port: ${port:8502}
 
 eureka:
   client:
@@ -14,7 +14,7 @@ spring:
       label: master
       server:
         git:
-          uri: 'http://admin@localhost:8078/r/config-server.git'
-          username: admin
-          password: admin
-          search-paths: '*'
+          uri: ${git.uri:http://admin@localhost:8078/r/config-server.git}
+          username: ${git.username:admin}
+          password: ${git.password:admin}
+          search-paths: ${git.paths:*}

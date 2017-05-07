@@ -10,12 +10,25 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath('se.transmode.gradle:gradle-docker:1.2')
     }
 }
 
 task wrapper(type: Wrapper) {
     gradleVersion = '3.0'
 }
+
+//task buildDocker(type: Docker, dependsOn: build) {
+//    push = true
+//    applicationName = jar.baseName
+//    dockerfile = file('src/main/docker/Dockerfile')
+//    doFirst {
+//        copy {
+//            from jar
+//            into stageDir
+//        }
+//    }
+//}
 
 configure(allprojects) { project ->
     group = "cn.binux"
@@ -52,12 +65,11 @@ configure(allprojects) { project ->
     ext.swagger2Version             = "2.6.1"
     ext.Version                     = "4.12"
 
-    ext.gradleScriptDir = "${rootProject.projectDir}/gradle"
-
     apply plugin: "java"
     apply plugin: 'idea'
     apply plugin: 'eclipse'
     apply plugin: 'org.springframework.boot'
+    apply plugin: 'docker'
 
     repositories {
         maven { url "http://localhost:8077/nexus/content/groups/public/" }
