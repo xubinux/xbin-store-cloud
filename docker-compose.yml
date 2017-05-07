@@ -1,0 +1,61 @@
+version: '2'
+services:
+  rabbitmq:
+      image: rabbitmq:3-management
+      ports:
+        - "4369:4369"
+        - "5671:5671"
+        - "5672:5672"
+        - "25672:25672"
+        - "15672:15672"
+  eureka1:
+      image: eureka:v1
+      command: java -Djava.security.egd=file:/dev/./urandom -jar /app/xbin-store-cloud-eureka-1.0.0.jar --eureka.serviceUrl=http://eureka2:8501/eureka/,http://eureka3:8501/eureka/ --hostname=eureka1
+      container_name: eureka1
+      hostname: eureka1
+      ports:
+          - "8501:8501"
+  eureka2:
+      image: eureka:v1
+      command: java -Djava.security.egd=file:/dev/./urandom -jar /app/xbin-store-cloud-eureka-1.0.0.jar --eureka.serviceUrl=http://eureka1:8501/eureka/,http://eureka3:8501/eureka/ --hostname=eureka2
+      container_name: eureka2
+      hostname: eureka2
+      ports:
+          - "8601:8501"
+  eureka3:
+      image: eureka:v1
+      command: java -Djava.security.egd=file:/dev/./urandom -jar /app/xbin-store-cloud-eureka-1.0.0.jar --eureka.serviceUrl=http://eureka1:8501/eureka/,http://eureka2:8501/eureka/ --hostname=eureka3
+      container_name: eureka3
+      hostname: eureka3
+      ports:
+          - "8701:8501"
+  config1:
+      image: config:v1
+      command: java -Djava.security.egd=file:/dev/./urandom -jar /app/xbin-store-cloud-config-1.0.0.jar --eureka.serviceUrl=http://eureka1:8501/eureka/,http://eureka2:8501/eureka/,http://eureka3:8501/eureka/ --git.uri=http://admin@219.230.50.73:8078/r/config-server.git --git.username=admin --git.password=admin --git.paths=*
+      container_name: config1
+      hostname: config1
+      dns:
+          - 114.114.114.114
+          - 114.114.115.115
+      ports:
+          - "8502:8502"
+  config2:
+      image: config:v1
+      command: java -Djava.security.egd=file:/dev/./urandom -jar /app/xbin-store-cloud-config-1.0.0.jar --eureka.serviceUrl=http://eureka1:8501/eureka/,http://eureka2:8501/eureka/,http://eureka3:8501/eureka/ --git.uri=http://admin@219.230.50.73:8078/r/config-server.git --git.username=admin --git.password=admin --git.paths=*
+      container_name: config2
+      hostname: config2
+      dns:
+          - 114.114.114.114
+          - 114.114.115.115
+      ports:
+          - "8602:8502"
+  config3:
+      image: config:v1
+      command: java -Djava.security.egd=file:/dev/./urandom -jar /app/xbin-store-cloud-config-1.0.0.jar --eureka.serviceUrl=http://eureka1:8501/eureka/,http://eureka2:8501/eureka/,http://eureka3:8501/eureka/ --git.uri=http://admin@219.230.50.73:8078/r/config-server.git --git.username=admin --git.password=admin --git.paths=*
+      container_name: config3
+      hostname: config3
+      dns:
+          - 114.114.114.114
+          - 114.114.115.115
+      ports:
+          - "8702:8502"
