@@ -1,3 +1,7 @@
+> 关于 xbin-store 的一些声明! --包括起因、为什么开源、进度。
+>
+> http://binux.cn/2017/05/08/xbin-store/
+
 ## xbin-store-cloud
 [![License](https://img.shields.io/badge/license-GPL-blue.svg)](LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/xubinux/xbin-store-cloud.svg?style=social&label=Stars)](https://github.com/xubinux/xbin-store-cloud)[![GitHub forks](https://img.shields.io/github/forks/xubinux/xbin-store-cloud.svg?style=social&label=Fork)](https://github.com/xubinux/xbin-store-cloud)
