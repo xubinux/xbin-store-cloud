@@ -16,7 +16,7 @@ spring:
     password: guest
   data:
     solr:
-      host: http://192.168.125.131:8080/solr/collection1
+      host: http://192.168.125.131:8080/solr/#/collection1
       #zkHost:
       repositories:
         enabled: false

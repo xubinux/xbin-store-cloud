@@ -9,7 +9,7 @@ RUN mkdir /app
 
 WORKDIR /app
 
-COPY build/libs/xbin-store-cloud-service-notify-1.0.0.jar /app
+COPY xbin-store-cloud-service-notify-1.0.0.jar /app
 
 ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app/xbin-store-cloud-service-notify-1.0.0.jar"]
 

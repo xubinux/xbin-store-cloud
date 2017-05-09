@@ -15,20 +15,9 @@ buildscript {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '3.0'
+    gradleVersion = '3.4'
 }
 
-//task buildDocker(type: Docker, dependsOn: build) {
-//    push = true
-//    applicationName = jar.baseName
-//    dockerfile = file('src/main/docker/Dockerfile')
-//    doFirst {
-//        copy {
-//            from jar
-//            into stageDir
-//        }
-//    }
-//}
 
 configure(allprojects) { project ->
     group = "cn.binux"
@@ -38,6 +27,7 @@ configure(allprojects) { project ->
     ext.springBootVersion           = '1.5.3.RELEASE'
     ext.springBootMyBatisVersion    = '1.2.0'
     ext.springBootpagehelperVersion = '1.1.0'
+    ext.springBootAdminVersion      = '1.5.0'
     ext.springBootDruidVersion      = '0.0.1-SNAPSHOT'
     ext.springBootRedisVersion      = '0.0.1-SNAPSHOT'
     ext.junitVersion                = "4.12"
@@ -68,7 +58,10 @@ configure(allprojects) { project ->
     apply plugin: "java"
     apply plugin: 'idea'
     apply plugin: 'eclipse'
-    apply plugin: 'org.springframework.boot'
+
+    if (!(name.contains('mapper') || name.contains('pojo'))) {
+        apply plugin: 'org.springframework.boot'
+    }
     apply plugin: 'docker'
 
     repositories {
@@ -76,12 +69,28 @@ configure(allprojects) { project ->
     }
 
     dependencies {
-        testCompile("org.springframework.boot:spring-boot-starter-test")
+
+        if (!(name.contains('mapper') || name.contains('pojo'))) {
+            testCompile("org.springframework.boot:spring-boot-starter-test")
+        }
+
         testCompile("junit:junit:${junitVersion}")
     }
     dependencyManagement {
         imports {
             mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+
+    task buildDocker(type: Docker, dependsOn: bootRepackage) {
+        push = true
+        applicationName = jar.baseName
+        dockerfile = file('Dockerfile')
+        doFirst {
+            copy {
+                from jar
+                into stageDir
+            }
         }
     }
 }
@@ -119,6 +128,16 @@ project("xbin-store-cloud-sleuth") {
         compile("io.zipkin.java:zipkin-autoconfigure-ui")
     }
 }
+project("xbin-store-cloud-admin") {
+    description = "xbin-store-cloud-admin"
+
+    dependencies {
+        compile("de.codecentric:spring-boot-admin-server:${springBootAdminVersion}")
+        compile("de.codecentric:spring-boot-admin-server-ui:${springBootAdminVersion}")
+        compile("org.springframework.boot:spring-boot-starter-actuator")
+        compile("org.springframework.cloud:spring-cloud-starter-eureka")
+    }
+}
 project("xbin-store-cloud-common") {
     description = "xbin-store-cloud-common"
 
@@ -144,12 +163,25 @@ project("xbin-store-cloud-common-pojo") {
 project("xbin-store-cloud-common-mapper") {
     description = "xbin-store-cloud-common-mapper"
 
+    task copyXml(type: Copy){
+        from 'src/cn/binux/mapper'
+        into 'build/classes/main/cn/binux/mapper'
+        exclude '**/*.java'
+    }
+
+    build{
+        doLast {
+            copyXml
+        }
+    }
+
     dependencies {
         compile(project(":xbin-store-cloud-common-pojo"))
         compile("mysql:mysql-connector-java:${mysqlVersion}")
         compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:${springBootMyBatisVersion}")
         compile("com.github.pagehelper:pagehelper-spring-boot-starter:${springBootpagehelperVersion}")
         compile("cn.binux:spring-boot-starter-druid:${springBootDruidVersion}")
+        compile fileTree(dir: 'src', includes: ['/*.xml'])
     }
     jar {
         //指定包名
@@ -511,6 +543,18 @@ configure(rootProject) {
 //        testCompile(project(":spring-aop"))
 
     }
+
+//    task buildDocker(type: Docker, dependsOn: bootRepackage) {
+//        push = true
+//        applicationName = jar.baseName
+//        dockerfile = file('Dockerfile')
+//        doFirst {
+//            copy {
+//                from jar
+//                into stageDir
+//            }
+//        }
+//    }
 
 }
 

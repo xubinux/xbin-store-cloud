@@ -1,10 +1,10 @@
 spring:
   application:
-    name: xbin-store-cloud-service-admin
+    name: @project.artifactId@
   cloud:
     config:
       label: master
-      profile: dev
+      profile: @profile@
       discovery:
         enabled: true
         service-id: config-server
