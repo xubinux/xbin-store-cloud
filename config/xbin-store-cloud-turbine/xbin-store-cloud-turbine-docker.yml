@@ -9,7 +9,7 @@ turbine:
 
 spring:
   rabbitmq:
-    host: 219.230.50.73
+    host: rabbitmq
     port: 5672
     username: guest
     password: guest

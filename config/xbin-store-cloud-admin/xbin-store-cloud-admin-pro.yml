@@ -59,12 +59,6 @@ spring:
     username: guest
     password: guest
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8501/eureka/,http://localhost:8601/eureka/,http://localhost:8701/eureka/
-
-
 fastdfs:
   tracker:
     server: 192.168.125.129:22122

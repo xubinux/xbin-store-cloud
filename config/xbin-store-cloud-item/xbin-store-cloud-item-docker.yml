@@ -1,12 +1,12 @@
 # web配置------------------------------------------------------------------------------------------------------------------------------------------------
 web:
   server:
-    port: 8101
+    port: 8103
 
 # service配置------------------------------------------------------------------------------------------------------------------------------------------------
 service:
   server:
-    port: 8513
+    port: 8514
 
 druid:
     url: jdbc:mysql://219.230.50.73:3306/xbin_store?characterEncoding=utf-8
@@ -46,15 +46,21 @@ redisKey:
   # 缓存时间 默认半小时
   expire_time: 1800
   prefix:
-    # 首页大广告
-    index_ad: INDEX_AD
+    item_info_profix: 'ITEM_INFO:'
+  suffix:
+    item_info_base_suffix: ':BASE'
+    item_info_desc_suffix: ':DESC'
+
+
+# 静态页面生成目录
+static_html_path: /Volumes/HGST/IdeaProjects/xbin-store/xbin-store-service-item/item/
 
 # 公用配置------------------------------------------------------------------------------------------------------------------------------------------------
 spring:
   zipkin:
-    base-url: http://127.0.0.1:8504
+    base-url: http://zipkin:8504
   rabbitmq:
-    host: localhost
+    host: rabbitmq
     port: 5672
     username: guest
     password: guest
@@ -62,7 +68,7 @@ spring:
 # REDIS (RedisProperties)
 redis:
   cluster: false
-  single-host: 219.230.50.94
+  single-host: redis
   single-port: 6379
   password:
 

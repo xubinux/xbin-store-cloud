@@ -1,12 +1,10 @@
 # web配置------------------------------------------------------------------------------------------------------------------------------------------------
-web:
-  server:
-    port: 8101
+
 
 # service配置------------------------------------------------------------------------------------------------------------------------------------------------
 service:
   server:
-    port: 8513
+    port: 8516
 
 druid:
     url: jdbc:mysql://219.230.50.73:3306/xbin_store?characterEncoding=utf-8
@@ -44,17 +42,26 @@ mybatis:
 # Redis
 redisKey:
   # 缓存时间 默认半小时
-  expire_time: 1800
+  expire_time: 3600
   prefix:
-    # 首页大广告
-    index_ad: INDEX_AD
+    # 号码登录次数前缀
+    mobile_login_time:
+      key: 'MOBILE_LOGIN_TIME:'
+      expire_time: 3600
+    # 号码code前缀
+    mobile_login_code:
+      key: 'MOBILE_LOGIN_CODE:'
+      expire_time: 120
+
+# Redis 一段时间允许发送几条短信
+mobile_number_ceiling: 3
 
 # 公用配置------------------------------------------------------------------------------------------------------------------------------------------------
 spring:
   zipkin:
-    base-url: http://127.0.0.1:8504
+    base-url: http://zipkin:8504
   rabbitmq:
-    host: localhost
+    host: rabbitmq
     port: 5672
     username: guest
     password: guest
@@ -62,7 +69,7 @@ spring:
 # REDIS (RedisProperties)
 redis:
   cluster: false
-  single-host: 219.230.50.94
+  single-host: redis
   single-port: 6379
   password:
 

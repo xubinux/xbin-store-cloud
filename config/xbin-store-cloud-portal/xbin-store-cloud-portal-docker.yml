@@ -52,9 +52,9 @@ redisKey:
 # 公用配置------------------------------------------------------------------------------------------------------------------------------------------------
 spring:
   zipkin:
-    base-url: http://127.0.0.1:8504
+    base-url: http://zipkin:8504
   rabbitmq:
-    host: localhost
+    host: rabbitmq
     port: 5672
     username: guest
     password: guest
@@ -62,7 +62,7 @@ spring:
 # REDIS (RedisProperties)
 redis:
   cluster: false
-  single-host: 219.230.50.94
+  single-host: redis
   single-port: 6379
   password:
 

@@ -1,12 +1,12 @@
 # web配置------------------------------------------------------------------------------------------------------------------------------------------------
 web:
   server:
-    port: 8101
+    port: 8104
 
 # service配置------------------------------------------------------------------------------------------------------------------------------------------------
 service:
   server:
-    port: 8513
+    port: 8515
 
 druid:
     url: jdbc:mysql://219.230.50.73:3306/xbin_store?characterEncoding=utf-8
@@ -41,29 +41,43 @@ mybatis:
     type-aliases-package: cn.binux.pojo
     mapper-locations: classpath:mapper/*.xml
 
-# Redis
-redisKey:
-  # 缓存时间 默认半小时
-  expire_time: 1800
-  prefix:
-    # 首页大广告
-    index_ad: INDEX_AD
+# 密码错误
+password_error: '({"pwd":"账户名与密码不匹配，请重新输入","_t":"_ntInoTX"})'
+# 用户名不存在
+user_not_exist: '({"pwd":"账户名与密码不匹配，请重新输入<br/>如需海外手机登录请添加<a href="javascript:void(0);" id="country_code_selector" class="flk13" style="color:blue;">国家区号</a>","_t":"_ntqtNMt","countryTips":true})'
+# 成功响应首页
+portal_path: '({"success":"http://localhost:8101/"})'
 
 # 公用配置------------------------------------------------------------------------------------------------------------------------------------------------
 spring:
   zipkin:
-    base-url: http://127.0.0.1:8504
+    base-url: http://zipkin:8504
   rabbitmq:
-    host: localhost
+    host: rabbitmq
     port: 5672
     username: guest
     password: guest
 
+# Redis
+redisKey:
+  # 缓存时间
+  expire_time:
+    # 验证码失效时间
+    verifycode: 120
+    # 用户登录失效时间
+    login: 1800
+  prefix:
+    # 用户登录信息前缀
+    user_session: 'USER_SESSION:'
+    # 验证码Redis前缀
+    verifycode: 'VERIFYCODE:'
+    # 号码code
+    mobile_login_code: 'MOBILE_LOGIN_CODE:'
+
 # REDIS (RedisProperties)
 redis:
   cluster: false
-  single-host: 219.230.50.94
+  single-host: redis
   single-port: 6379
   password:
-
 # ------------------------------------------------------------------------------------------------------------------------------------------------

@@ -1,12 +1,12 @@
 # web配置------------------------------------------------------------------------------------------------------------------------------------------------
 web:
   server:
-    port: 8101
+    port: 8107
 
 # service配置------------------------------------------------------------------------------------------------------------------------------------------------
 service:
   server:
-    port: 8513
+    port: 8518
 
 druid:
     url: jdbc:mysql://219.230.50.73:3306/xbin_store?characterEncoding=utf-8
@@ -41,29 +41,35 @@ mybatis:
     type-aliases-package: cn.binux.pojo
     mapper-locations: classpath:mapper/*.xml
 
-# Redis
-redisKey:
-  # 缓存时间 默认半小时
-  expire_time: 1800
-  prefix:
-    # 首页大广告
-    index_ad: INDEX_AD
+#SSO 系统登录页面
+sso_login_page: 'http://localhost:8104/login.html'
 
 # 公用配置------------------------------------------------------------------------------------------------------------------------------------------------
 spring:
   zipkin:
-    base-url: http://127.0.0.1:8504
+    base-url: http://zipkin:8504
   rabbitmq:
-    host: localhost
+    host: rabbitmq
     port: 5672
     username: guest
     password: guest
 
+# Redis
+redisKey:
+  expire_time:
+    # 购物车缓存时间 一天
+    cart: 86400
+    # 订单项缓存时间 默认20分钟
+    order: 1200
+  prefix:
+    cart_info_profix: 'CART_INFO:'
+    cart_order_info_profix: 'CART_ORDER_INFO:'
+    cart_order_index_profix: 'CART_ORDER_INDEX:'
+
 # REDIS (RedisProperties)
 redis:
   cluster: false
-  single-host: 219.230.50.94
+  single-host: redis
   single-port: 6379
   password:
-
 # ------------------------------------------------------------------------------------------------------------------------------------------------
