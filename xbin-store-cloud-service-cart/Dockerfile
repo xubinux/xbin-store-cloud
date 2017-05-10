@@ -1,7 +1,7 @@
 # Name:     xbin-store-cloud-service-cart
 # Time:     2017-05-07
 
-FROM java:8-jdk
+FROM java:8-jre-alpine
 
 MAINTAINER Binux <xu.binux@gmail.com>
 

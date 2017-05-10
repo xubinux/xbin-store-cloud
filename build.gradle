@@ -59,7 +59,7 @@ configure(allprojects) { project ->
     apply plugin: 'idea'
     apply plugin: 'eclipse'
 
-    if (!(name.contains('mapper') || name.contains('pojo'))) {
+    if (!(name.contains('common'))) {
         apply plugin: 'org.springframework.boot'
     }
     apply plugin: 'docker'
@@ -69,28 +69,29 @@ configure(allprojects) { project ->
     }
 
     dependencies {
-
-        if (!(name.contains('mapper') || name.contains('pojo'))) {
+        if (!(name.contains('common'))) {
             testCompile("org.springframework.boot:spring-boot-starter-test")
+            testCompile("junit:junit:${junitVersion}")
         }
-
-        testCompile("junit:junit:${junitVersion}")
     }
     dependencyManagement {
         imports {
             mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
         }
     }
-
-    task buildDocker(type: Docker, dependsOn: bootRepackage) {
-        push = true
-        applicationName = jar.baseName
-        dockerfile = file('Dockerfile')
-        doFirst {
-            copy {
-                from jar
-                into stageDir
+    if (!((name.contains('common')) || (name.contains('api'))  || (name == 'xbin-store-cloud'))) {
+        task buildDocker(type: Docker, dependsOn: bootRepackage) {
+            push = true
+            registry = "192.168.30.109:5000"
+            applicationName = jar.baseName
+            dockerfile = file('Dockerfile')
+            doFirst {
+                copy {
+                    from jar
+                    into stageDir
+                }
             }
+
         }
     }
 }
@@ -162,18 +163,6 @@ project("xbin-store-cloud-common-pojo") {
 }
 project("xbin-store-cloud-common-mapper") {
     description = "xbin-store-cloud-common-mapper"
-
-    task copyXml(type: Copy){
-        from 'src/cn/binux/mapper'
-        into 'build/classes/main/cn/binux/mapper'
-        exclude '**/*.java'
-    }
-
-    build{
-        doLast {
-            copyXml
-        }
-    }
 
     dependencies {
         compile(project(":xbin-store-cloud-common-pojo"))
