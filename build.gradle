@@ -53,7 +53,7 @@ configure(allprojects) { project ->
     ext.beetl_starterVersion        = "0.0.3"
     ext.hutoolVersion               = "3.0.3"
     ext.swagger2Version             = "2.6.1"
-    ext.Version                     = "4.12"
+    ext.logbackkafkaVersion         = "0.1.0"
 
     apply plugin: "java"
     apply plugin: 'idea'
@@ -82,7 +82,7 @@ configure(allprojects) { project ->
     if (!((name.contains('common')) || (name.contains('api'))  || (name == 'xbin-store-cloud'))) {
         task buildDocker(type: Docker, dependsOn: bootRepackage) {
             push = true
-            registry = "192.168.30.109:5000"
+            registry = dockerRegistry
             applicationName = jar.baseName
             dockerfile = file('Dockerfile')
             doFirst {
@@ -91,8 +91,11 @@ configure(allprojects) { project ->
                     into stageDir
                 }
             }
-
         }
+    }
+
+    if (name.contains('api')) {
+        tasks.remove(bootRepackage)
     }
 }
 
@@ -101,6 +104,7 @@ project("xbin-store-cloud-eureka") {
 
     dependencies {
         compile("org.springframework.cloud:spring-cloud-starter-eureka-server")
+        compile("com.github.danielwegener:logback-kafka-appender:${logbackkafkaVersion}")
     }
 }
 project("xbin-store-cloud-config") {
@@ -138,6 +142,7 @@ project("xbin-store-cloud-admin") {
         compile("org.springframework.boot:spring-boot-starter-actuator")
         compile("org.springframework.cloud:spring-cloud-starter-eureka")
     }
+
 }
 project("xbin-store-cloud-common") {
     description = "xbin-store-cloud-common"
@@ -205,6 +210,8 @@ project("xbin-store-cloud-service-admin") {
         compile("org.springframework.cloud:spring-cloud-starter-hystrix")
         compile("org.springframework.cloud:spring-cloud-starter-bus-amqp")
         compile("org.springframework.cloud:spring-cloud-starter-config")
+        compile("org.springframework.cloud:spring-cloud-starter-security")
+        compile("org.springframework.cloud:spring-cloud-starter-oauth2")
     }
 
     bootRepackage {
