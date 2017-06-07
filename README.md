@@ -1,7 +1,11 @@
-> 关于 xbin-store 的一些声明! --包括起因、为什么开源、进度。
+> 很多天没有更新 由于一些事
 >
-> http://binux.cn/2017/05/08/xbin-store/
+> 自己也想明白了 嘴长在别人身上 做好自己就行
+>
+> 6月20 继续完善项目
 
+
+---
 
 ## xbin-store-cloud
 [![License](https://img.shields.io/badge/license-GPL-blue.svg)](LICENSE)
@@ -9,7 +13,7 @@
 
 模仿国内知名B2C网站,实现的一个分布式B2C商城
 
-进群讨论 群 626068936 :u7a7a: 
+进群讨论 群 626068936
 
 ### Spring Cloud 版本:
 
