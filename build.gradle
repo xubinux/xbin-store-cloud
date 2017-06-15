@@ -5,7 +5,7 @@ buildscript {
     repositories {
         mavenLocal()
         maven{
-            url 'http://localhost:8077/nexus/content/groups/public/'
+            url 'http://182.92.218.12:8077/nexus/content/groups/public/'
         }
     }
     dependencies {
