@@ -1,0 +1,12 @@
+server:
+  port: ${port:8503}
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${eureka.serviceUrl:http://127.0.0.1:8503/eureka/}
+
+spring:
+  application:
+    name: Zuul
+
