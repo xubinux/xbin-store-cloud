@@ -1,9 +1,10 @@
 rootProject.name = 'xbin-store-cloud'
 
 include "xbin-store-cloud-eureka"
-include "xbin-store-cloud-config"
+//include "xbin-store-cloud-config"
 include "xbin-store-cloud-turbine"
 include "xbin-store-cloud-sleuth"
+include "xbin-store-cloud-zuul"
 include "xbin-store-cloud-admin"
 include "xbin-store-cloud-common"
 include "xbin-store-cloud-common-pojo"
