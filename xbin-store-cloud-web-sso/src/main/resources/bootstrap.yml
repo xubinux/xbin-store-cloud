@@ -1,19 +1,6 @@
 spring:
   application:
     name: xbin-store-cloud-web-sso
-  cloud:
-    config:
-      label: master
-      profile: dev
-      discovery:
-        enabled: true
-        service-id: config-server
-      name: xbin-store-cloud-sso
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
 
 security.basic.enabled: false
 

@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @SpringBootApplication
 @EnableDiscoveryClient
+//@EnableApolloConfig
 @EnableTransactionManagement
 @MapperScan(basePackages = "cn.binux.mapper")
 public class XbinStoreServiceCartApplication {

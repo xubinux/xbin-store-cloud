@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
 @EnableEurekaClient
 @EnableFeignClients
 @Configuration
+//@EnableApolloConfig
 @EnableHystrix
 public class XbinStoreWebSSOApplication  {
 

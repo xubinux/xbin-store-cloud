@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Configuration;
 @EnableFeignClients
 @Configuration
 @EnableHystrix
+//@EnableApolloConfig
 public class XbinStoreWebCartApplication {
 
 	public static void main(String[] args) {

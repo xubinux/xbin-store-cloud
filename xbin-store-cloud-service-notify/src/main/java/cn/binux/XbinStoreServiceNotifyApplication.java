@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 
 @EnableHystrix
 @Configuration
+//@EnableApolloConfig
 @SpringBootApplication
 @EnableDiscoveryClient
 public class XbinStoreServiceNotifyApplication {

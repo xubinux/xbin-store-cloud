@@ -1,19 +1,6 @@
 spring:
   application:
-    name: @project.artifactId@
-  cloud:
-    config:
-      label: master
-      profile: @profile@
-      discovery:
-        enabled: true
-        service-id: config-server
-      name: xbin-store-cloud-admin
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
+    name: xbin-store-cloud-service-admin
 
 security.basic.enabled: false
 
